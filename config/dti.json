@@ -1,0 +1,18 @@
+{
+    "descriptions": [
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DTI*"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "dti*"
+            }
+        }
+      ]
+}

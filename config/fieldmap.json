@@ -1,0 +1,11 @@
+{
+    "descriptions": [
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+            "criteria": {
+                "SeriesDescription": "FM*"
+            }
+        }
+    ]
+}

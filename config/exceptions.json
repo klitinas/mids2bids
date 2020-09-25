@@ -1,0 +1,18 @@
+{
+    "func_faces": {
+        "TotalReadoutTime": 0.048,
+        "PhaseEncodingDirection": "j-"
+    },
+    "func_resting": {
+        "TotalReadoutTime": 0.068,
+        "PhaseEncodingDirection": "j-"
+    },
+    "func_msit": {
+        "TotalReadoutTime": 0.078,
+        "PhaseEncodingDirection": "j+"
+    },
+    "func_reward": {
+        "TotalReadoutTime": 0.048,
+        "PhaseEncodingDirection": "j+"
+    }
+}

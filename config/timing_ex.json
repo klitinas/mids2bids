@@ -1,0 +1,14 @@
+{
+    "func_faces": {
+        "TotalReadoutTime": 0.00048
+    },
+    "func_gng": {
+        "TotalReadoutTime": 0.00068
+    },
+    "func_rest": {
+        "TotalReadoutTime": 0.00078
+    },
+    "func_reward": {
+        "TotalReadoutTime": 0.00048
+    }
+}
