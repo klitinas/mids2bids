@@ -6,7 +6,7 @@ Attempts to auto-generate a dcm2bids configuration file which can then be used t
 ## Setup
 ### Software requirements
 * dcm2niix (tested with v.1.0.20200331)
-* dcm2bids (tested with v. 2.1.4)
+* dcm2bids (https://cbedetti.github.io/Dcm2Bids/, tested with v. 2.1.4)
 * python3 with these packages:
     - nipype
     - nibabel
