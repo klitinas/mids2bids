@@ -185,8 +185,9 @@ def modify_func_fm_run(FILEROOT):
     # Splits into AP/PA sets
     # sub-<label>[_ses-<label>][_acq-<label>][_ce-<label>]_dir-<label>[_run-<index>]_epi.json
     LROOT = FILEROOT.split('_')
-    APNAME = LROOT[0]+'_dir-AP_'+ LROOT[1] + '_' + LROOT[2]
-    PANAME = LROOT[0]+'_dir-PA_'+ LROOT[1] + '_' + LROOT[2]
+    APNAME = LROOT[0]+'_dir-AP_'+ '_'.join(LROOT[1:])
+    PANAME = LROOT[0]+'_dir-PA_'+ '_'.join(LROOT[1:])
+
 
     # Volumes 1/3 are AP, 2/4 PA
     SPLITTER = fsl.Split(in_file = NII,dimension = 't',out_base_name = 'tmp')
@@ -208,9 +209,19 @@ def modify_func_fm_run(FILEROOT):
 
 
     # Find which func data to use it for (right now assumes series description matches, may need to be more open).
+    # Kludge: if stub of IntendedFor is there, populate with all runs
     os.chdir('..')
-    INTENDEDFOR = glob.glob('func/*task-{}_*bold.nii.gz'.format(TASKNAME))
-    JSON_DAT['IntendedFor'] = INTENDEDFOR
+
+    INTENDEDFOR = []
+    if 'IntendedFor' in JSON_DAT:
+        STUB_TASKS = JSON_DAT['IntendedFor']
+        for STUB in STUB_TASKS:
+            INTEND_TASK = glob.glob('func/*task-{}_*bold.nii.gz'.format(STUB))
+            INTENDEDFOR += INTEND_TASK
+    else:
+        INTENDEDFOR = glob.glob('func/*task-{}_*bold.nii.gz'.format(TASKNAME))
+
+    JSON_DAT['IntendedFor'] = sorted(INTENDEDFOR)
     os.chdir('fmap')
 
     write_json(APNAME + '.json',JSON_DAT)
@@ -353,6 +364,7 @@ def build_config(SUBJDIR=None,EXTRAFILE=None):
 
 
             if RUNCFG not in CONFIG_OUT['descriptions']:
+                print(SEDESC)
                 CONFIG_OUT['descriptions'].append(RUNCFG)
 
     # Write out the file, but don't overwrite if exists
@@ -483,3 +495,5 @@ if __name__ == "__main__":
 
         # Move results to main subject directory
         shutil.move(os.path.join(WORKDIR,'sub-'+OUTSUBJNAME),ROOTBIDSDIR)
+
+        # Copy source data and processed results into the BIDS dir structure
