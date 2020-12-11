@@ -57,7 +57,6 @@ If the `--d2b_cfg_file` optional argument is not specified, looks for a config f
 * Add pfile compatibility, currently just DICOM-friendly.
 * Need to fully verify PEPOLAR, timing parameters for functional and DTI data. Current work is based mainly on ABCD data.
 * DTI field map data is probably/certainly incorrectly split between AP/PA PhaseEncodingDirections
-* Functional field maps are mapped to the corresponding fMRI data (the "IntendedFor" field in the .json). This may not always match exactly.
 * Final output BIDS directory do not include our processed outputs or source DICOMS/pfiles. Could easily do a copy from original (processed data into BIDS derivitives/ folder, DICOMS/pfiles into sourcedata/ would work), but unsure how best we want to handle that.  Maybe have that as an option.
 * Might sometimes run into problems if you try to repeat the conversion for a given subject without removing outputs from the first attempt beforehand.
 * dcm2niix, when called from dcm2bids, sometimes hangs and takes some time to finish.  I believe this mainly happens with high disk I/O and/or low available disk space.
